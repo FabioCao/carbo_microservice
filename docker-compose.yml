@@ -1,0 +1,22 @@
+services:
+  server:
+    container_name: carbo-microservice
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - '5050:5000'
+    networks:
+      - host
+
+  db:
+    image: 'mongo'
+    container_name: mongo
+    ports:
+      - '27017:27017'
+    networks:
+      - host 
+networks: 
+  host:
+    driver: NETCARBO

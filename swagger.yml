@@ -1,0 +1,148 @@
+swagger: "2.0"
+info:
+  description: Swagger file
+  version: "1.0.0"
+  title: Swagger ReST Carboidratos
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /carboidratos:
+    get:
+      operationId: carboidratos.read_all
+      tags:
+        - Carboidratos
+      summary: Lista de Carboidratos
+      description: Lista de Carboidratos
+      responses:
+        200:
+          description: Sucesso na leitura de Carboidratos
+          schema:
+            type: array
+            items:
+              properties:
+                alimento:
+                  type: string
+                medidausu:
+                  type: string
+                medida:
+                  type: number
+                cho:
+                  type: number
+                cal:
+                  type: number
+                timestamp:
+                  type: string
+    post:
+      operationId: carboidratos.create
+      tags:
+        - Carboidratos
+      summary: Cria um Alimento e adiciona na lista de Carboidratos
+      description: Adiciona aliento na lista de Carboidratos
+      parameters:
+        - name: carbon
+          in: body
+          description: Carboidrato a ser criado
+          required: True
+          schema:
+            type: object
+            properties:
+              alimento:
+                type: string
+                description: Alimento
+              medidausu:
+                type: string
+                description: Medida Usual
+              medida:
+                type: number
+                description: g ou ml
+              cho:
+                type: number
+                description: CHO (g)
+              cal:
+                type: number
+                description: Calorias
+      responses:
+        201:
+          description: Sucesso ao criar
+
+  /carboidratos/{alimento}:
+    get:
+      operationId: carboidratos.read_one
+      tags:
+        - Carboidratos
+      summary: Leitura de um alimrnto da lista de Carboidratos
+      description: Leitura de um alimento
+      parameters:
+        - name: alimento
+          in: path
+          description: Alimento
+          type: string
+          required: True
+      responses:
+        200:
+          description: Sucesso na leitura de um alimento
+          schema:
+            properties:
+              alimento:
+                type: string
+              medidausu:
+                type: string
+              medida:
+                type: number
+              cho:
+                type: number
+              cal:
+                type: number
+              timestamp:
+                type: string
+    put:
+      operationId: carboidratos.update
+      tags:
+        - Carboidratos
+      summary: Update alimento na lista de Carboidratos
+      description: Update na lista
+      parameters:
+        - name: alimento
+          in: path
+          description: Alimento
+          type: string
+          required: True
+        - name: carbon
+          in: body
+          schema:
+            type: object
+            properties:
+              alimento:
+                type: string
+              medidausu:
+                type: string
+              medida:
+                type: number
+              cho:
+                type: number
+              cal:
+                type: number
+      responses:
+        200:
+          description: Sucesso ao atualizar
+
+    delete:
+      operationId: carboidratos.delete
+      tags:
+        - Carboidratos
+      summary: Deletar um alimento na lista de Carboidratos
+      description: Deleta um alimento
+      parameters:
+        - name: alimento
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Sucesso ao deletar
+
